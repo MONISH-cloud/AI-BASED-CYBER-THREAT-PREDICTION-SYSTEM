@@ -1,9 +1,5 @@
 # AI-BASED-CYBER-THREAT-PREDICTION-SYSTEMT
 
----
-
-# AI-Driven Cyber Threat Prediction System
-
 
 ![Accuracy](https://img.shields.io/badge/Accuracy-98.6%25-brightgreen)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
