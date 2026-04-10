@@ -1,79 +1,207 @@
-# AI-BASED-CYBER-THREAT-PREDICTION-SYSTEMT
+# 🚀 AI-Driven Cyber Threat Prediction System
 
+## 📌 Overview
 
-![Accuracy](https://img.shields.io/badge/Accuracy-98.6%25-brightgreen)
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+This project implements an **AI-Driven Cyber Threat Prediction System** for real-time detection and forecasting of network security threats, with a primary focus on **Distributed Denial-of-Service (DDoS) attacks**.
 
-## 📌 Project Overview
-The **AI-Driven Cyber Threat Prediction System** is an intelligent, multi-engine framework designed for real-time detection and proactive forecasting of network security threats. By integrating temporal sequence modeling with unsupervised anomaly detection, the system provides a robust defense against both known patterns (e.g., DDoS) and previously unseen "zero-day" vulnerabilities.
+The system integrates a **hybrid multi-engine architecture** combining:
 
-### Key Features
-* **Hybrid Detection Engine:** Combines **Bi-LSTM** for temporal patterns and **Deep Autoencoders** for anomaly detection.
-* **Predictive Forecasting:** Anticipates attack evolution across short-term (5-packet) and extended (30-packet) horizons.
-* **Ensemble Risk Fusion:** A weighted mechanism ($0.90$ Bi-LSTM + $0.10$ Autoencoder) to produce a unified risk score.
-* **Real-time Dashboard:** Integrated Streamlit-based interface for live monitoring and severity-based alerting.
+* Bidirectional LSTM (Bi-LSTM) for temporal traffic analysis
+* Autoencoder for anomaly detection
+* Weighted ensemble model for unified risk scoring
 
----
-
-## 🏗️ System Architecture & File Flow
-
-The framework follows a structured pipeline from raw traffic capture to predictive alerting.
-
-
-### 1. Preprocessing & Sequence Formation
-* **Flow Transformation:** Raw network traffic is converted into structured flow-based feature representations.
-* **Temporal Windows:** Data is grouped into fixed-length sequential windows to capture gradual attack buildup.
-
-### 2. Dual-Engine Modeling
-* **Temporal Engine (Bi-LSTM):** Captures dependencies by analyzing both past and future context within traffic sequences.
-* **Anomaly Engine (Autoencoder):** Learned on benign traffic; it identifies threats by measuring reconstruction loss (deviations from "normal").
-
-### 3. Risk Fusion & Prediction
-* **Weighted Ensemble:** Merges the classification probability and anomaly score into a single continuous risk metric.
-* **Temporal Forecasting:** Analyzes the rate of change in risk scores to predict future threat trajectories.
+Unlike traditional intrusion detection systems, this framework provides **predictive capabilities**, enabling early detection of cyber threats before they escalate.
 
 ---
 
-## 📊 Performance
-The system was benchmarked using the **CICIDS-2017 dataset**, achieving state-of-the-art results:
+## 🎯 Key Contributions
 
-| Metric | Value |
-| :--- | :--- |
-| **Accuracy** | 98.6% |
-| **Precision** | 0.98 |
-| **AUC** | 0.981 |
-| **False Positive Rate (FPR)** | 0.019 |
+* 🔹 Hybrid detection framework combining supervised and unsupervised learning
+* 🔹 Predictive threat forecasting (short-term & long-term horizons)
+* 🔹 Real-time risk scoring and alert generation
+* 🔹 Detection of both known and zero-day attacks
+* 🔹 Streamlit-based interactive monitoring system
 
 ---
 
-## 🚀 Getting Started
+## 🧠 System Architecture
 
-### Prerequisites
-* Python 3.8+
-* TensorFlow / Keras
-* Streamlit
-* Pandas & Scikit-learn
+The system consists of the following modules:
 
-### Installation
+1. **Data Preprocessing**
+
+   * Cleaning, normalization, and feature extraction
+   * Sequence generation for temporal modeling
+
+2. **Temporal Modeling (Bi-LSTM)**
+
+   * Captures sequential patterns in network traffic
+   * Learns evolving attack behavior
+
+3. **Anomaly Detection (Autoencoder)**
+
+   * Learns normal traffic patterns
+   * Detects deviations (zero-day attacks)
+
+4. **Ensemble Risk Fusion**
+
+   * Combines outputs:
+
+     * 90% Bi-LSTM
+     * 10% Autoencoder
+
+5. **Risk Prediction Module**
+
+   * Forecasts future attack trends
+   * Enables proactive defense
+
+6. **Decision Engine**
+
+   * Generates severity-based alerts:
+
+     * LOW (0–30%)
+     * MEDIUM (30–60%)
+     * HIGH (60–85%)
+     * CRITICAL (85–100%)
+
+---
+
+## 📊 Results & Performance
+
+* ✅ **Accuracy:** 98.6%
+* ✅ **AUC Score:** 0.981
+* ✅ Low false positive rate
+* ✅ Strong generalization to unseen traffic
+
+### 📈 Model Comparison
+
+| Model                     | Accuracy  |
+| ------------------------- | --------- |
+| Random Forest             | 96.8%     |
+| XGBoost                   | 97.5%     |
+| Bi-LSTM                   | 97.9%     |
+| **Proposed Hybrid Model** | **98.6%** |
+
+📌 As shown in the confusion matrix and ROC curve (paper Figures), the model achieves high true positives and low misclassification. 
+
+---
+
+## 📂 Project Structure
+
+```id="projstruct"
+AI-BASED-CYBER-THREAT-PREDICTION-SYSTEM/
+│
+├── README.md
+├── requirements.txt
+├── report.pdf
+│
+├── data/              # Dataset (CICIDS-based)
+│
+├── src/               # Source code
+│   ├── Predictor.py
+│   ├── detect_logic.py
+│   ├── ensemble.py
+│   ├── lstm_model.py
+│   ├── autoencoder_model.py
+│   ├── train2.py
+│   └── app2.py
+│
+├── models/            # Trained models
+│   ├── lstm_best3.pt
+│   ├── autoencoder_best3.pt
+│   ├── ddos_ensemble_phase1.pkl
+│
+├── results/           # Output results
+│   └── ddos_model_comparison.png
+```
+
+---
+
+## ⚙️ Installation
+
 ```bash
 git clone https://github.com/MONISH-cloud/AI-BASED-CYBER-THREAT-PREDICTION-SYSTEM.git
 cd AI-BASED-CYBER-THREAT-PREDICTION-SYSTEM
 pip install -r requirements.txt
 ```
 
-### Usage
-To launch the real-time monitoring dashboard:
+---
+
+## 🚀 Usage
+
+### Train the Model
+
 ```bash
-streamlit run livepro.py
+python src/train2.py
+```
+
+### Run Prediction
+
+```bash
+python src/Predictor.py
+```
+
+### Launch Dashboard
+
+```bash
+python src/app2.py
 ```
 
 ---
 
-## 👥 Contributors
-* **Monish R** - *RV University*
-* **Pradeep M Doddakaragi** - *RV University*
-* **Omkar Suresh Naik** - *RV University*
-* **Nihal Saukar K** - *RV University*
+## 🧪 Dataset
+
+* Based on **CICIDS-2017 dataset**
+* Includes benign and DDoS traffic samples
+* Preprocessed into sequential data for LSTM
 
 ---
+
+## 🔍 Risk Scoring Formula
+
+The system computes a unified risk score:
+
+```id="risk"
+R = 0.90 × P_LSTM + 0.10 × E_AE
+```
+
+Where:
+
+* **P_LSTM** = classification probability
+* **E_AE** = autoencoder reconstruction error
+
+This enables **continuous risk assessment** instead of binary classification.
+
+---
+
+## 💡 Key Features
+
+✔ Hybrid AI architecture
+✔ Real-time intrusion detection
+✔ Predictive threat forecasting
+✔ Low false positives
+✔ Scalable and deployable system
+
+---
+
+## 🔮 Future Work
+
+* Extend to multiple attack types (APT, ransomware)
+* Integrate attention mechanisms into Bi-LSTM
+* Use federated learning for distributed security
+* Evaluate on datasets like UNSW-NB15, CIC-IDS-2018
+
+---
+
+## 👨‍💻 Authors
+
+* Monish R
+* Omkar Suresh Naik
+* Pradeep M Doddakaragi
+* Nihal Saukar K
+
+(RV University, Bengaluru)
+
+---
+
 
